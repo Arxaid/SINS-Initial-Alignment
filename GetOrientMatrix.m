@@ -8,6 +8,7 @@ function C = GetOrientMatrix(vector)
 % Input:
 %   SINS initial alignment coordinates vector
 %   in the instrument coordinate system
+%   Nx, Ny, Nz, OMx, OMy, OMz
 % Output:
 %   Orientation matrix C in the instrument
 %   coordinate system
