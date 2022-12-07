@@ -9,6 +9,7 @@ close all
 clc
 
 % Constant values
+show = false;
 equator_g = 9.780327;   
 mps = 50;
 
@@ -104,49 +105,87 @@ for timeCounter = 1:totalTime
     pitchDiff(timeCounter) = pitchCalc(timeCounter) - pitchReal(timeCounter);
     rollDiff(timeCounter) = rollCalc(timeCounter) - rollReal(timeCounter);
     
-    disp('_____________________________________________');
-    disp(['Time:                           ' num2str(timeArr(timeCounter)) ' sec']);
-    disp(['Awerage per second yaw angle:   ' num2str(vector(timeCounter, 7))]);
-    disp(['Awerage per second pitch angle: ' num2str(vector(timeCounter, 8))]);
-    disp(['Awerage per second roll angle:  ' num2str(vector(timeCounter, 9))]);
-    disp(['Calculated yaw angle:           ' num2str(yawCalc(timeCounter))]);
-    disp(['Calculated pitch angle:         ' num2str(pitchCalc(timeCounter))]);
-    disp(['Calculated roll angle:          ' num2str(rollCalc(timeCounter))]);
-    disp(['Difference between yaw angles:  ' num2str(yawDiff(timeCounter))]);
-    disp(['Difference between pitch angles:' num2str(pitchDiff(timeCounter))]);
-    disp(['Difference between roll angles: ' num2str(rollDiff(timeCounter))]);
+    disp('______________________________________________');
+    disp(['Time:                                ' num2str(timeArr(timeCounter)) ' sec']);
+    disp(['Awerage per second yaw angle:        ' num2str(vector(timeCounter, 7))]);
+    disp(['Awerage per second pitch angle:      ' num2str(vector(timeCounter, 8))]);
+    disp(['Awerage per second roll angle:       ' num2str(vector(timeCounter, 9))]);
+    disp(['Calculated yaw angle:                ' num2str(yawCalc(timeCounter))]);
+    disp(['Calculated pitch angle:              ' num2str(pitchCalc(timeCounter))]);
+    disp(['Calculated roll angle:               ' num2str(rollCalc(timeCounter))]);
+    disp(['Difference between yaw angles:       ' num2str(yawDiff(timeCounter))]);
+    disp(['Difference between pitch angles:     ' num2str(pitchDiff(timeCounter))]);
+    disp(['Difference between roll angles:      ' num2str(rollDiff(timeCounter))]);
 end
-disp('_____________________________________________');
+disp('______________________________________________');
 
-figure('Name','Yaw angle')
-plot(timeArr, yawReal, timeArr, yawCalc), grid
-xlabel('t, sec')
-ylabel('Yaw angle, grades')
-legend('Real', 'Calc')
+if (show == true)
+    figure('Name','Linear acceleration evolution')
+    plot(timeArr, vector(:,1)), grid
+    xlabel('t, sec')
+    ylabel('Nx, m/sec^2')
+    legend('Nx component')
 
-figure('Name','Yaw angles difference')
-plot(timeArr, yawDiff), grid
-xlabel('t, sec')
-ylabel('Yaw angle, grades')
+    figure('Name','Linear acceleration evolution')
+    plot(timeArr, vector(:,2)), grid
+    xlabel('t, sec')
+    ylabel('Ny, m/sec^2')
+    legend('Ny component')
 
-figure('Name','Pitch angle')
-plot(timeArr, pitchReal, timeArr, pitchCalc), grid
-xlabel('t, sec')
-ylabel('Pitch angle, grades')
-legend('Real', 'Calc')
+    figure('Name','Linear acceleration evolution')
+    plot(timeArr, vector(:,3)), grid
+    xlabel('t, sec')
+    ylabel('Nz, m/sec^2')
+    legend('Nz component')
 
-figure('Name','Pitch angles difference')
-plot(timeArr, pitchDiff), grid
-xlabel('t, sec')
-ylabel('Pitch angle, grades')
+    figure('Name','Angular velocity evolution')
+    plot(timeArr, vector(:,4)), grid
+    xlabel('t, sec')
+    ylabel('OMx, rad/sec')
+    legend('OMx component')
 
-figure('Name','Roll angle')
-plot(timeArr, rollReal, timeArr, rollCalc), grid
-xlabel('t, sec')
-ylabel('Roll angle, grades')
-legend('Real', 'Calc')
+    figure('Name','Angular velocity evolution')
+    plot(timeArr, vector(:,5)), grid
+    xlabel('t, sec')
+    ylabel('OMy, rad/sec')
+    legend('OMy component')
 
-figure('Name','Roll angles difference')
-plot(timeArr, rollDiff), grid
-xlabel('t, sec')
-ylabel('Roll angle, grades')
+    figure('Name','Angular velocity evolution')
+    plot(timeArr, vector(:,6)), grid
+    xlabel('t, sec')
+    ylabel('OMz, rad/sec')
+    legend('OMz component')
+
+    figure('Name','Yaw angle')
+    plot(timeArr, yawReal, timeArr, yawCalc), grid
+    xlabel('t, sec')
+    ylabel('Yaw angle, grades')
+    legend('Real', 'Calculated')
+
+    figure('Name','Yaw angles difference')
+    plot(timeArr, yawDiff), grid
+    xlabel('t, sec')
+    ylabel('Yaw angle, grades')
+
+    figure('Name','Pitch angle')
+    plot(timeArr, pitchReal, timeArr, pitchCalc), grid
+    xlabel('t, sec')
+    ylabel('Pitch angle, grades')
+    legend('Real', 'Calculated')
+
+    figure('Name','Pitch angles difference')
+    plot(timeArr, pitchDiff), grid
+    xlabel('t, sec')
+    ylabel('Pitch angle, grades')
+
+    figure('Name','Roll angle')
+    plot(timeArr, rollReal, timeArr, rollCalc), grid
+    xlabel('t, sec')
+    ylabel('Roll angle, grades')
+    legend('Real', 'Calculated')
+
+    figure('Name','Roll angles difference')
+    plot(timeArr, rollDiff), grid
+    xlabel('t, sec')
+    ylabel('Roll angle, grades')
+end
